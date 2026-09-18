@@ -1,0 +1,104 @@
+[environment] git version 2.43.0
+
+========================================================================================
+Installing missing Python dependencies
+========================================================================================
+[environment] pip install gensim tree-sitter tree-sitter-java
+
+========================================================================================
+Mounting Google Drive for persistent checkpoints
+========================================================================================
+Mounted at /content/drive
+[persistent] /content/drive/MyDrive/FUSE_JIT_PERSISTENT
+[restore] Google Drive -> local: commit_features.pkl
+
+========================================================================================
+Downloading JIT-Defect-Extended
+========================================================================================
+
+========================================================================================
+STAGE 1/3 - Reconstruct commit-level dataset
+========================================================================================
+[repo] cloning ant-ivy
+[repo] cloning commons-bcel
+[repo] cloning commons-beanutils
+[repo] cloning commons-codec
+[repo] cloning commons-collections
+[repo] cloning commons-compress
+[repo] cloning commons-configuration
+[repo] cloning commons-dbcp
+[repo] cloning commons-digester
+[repo] cloning commons-io
+[repo] cloning commons-jcs
+[repo] cloning commons-lang
+[repo] cloning commons-math
+[repo] cloning commons-net
+[repo] cloning commons-scxml
+[repo] cloning commons-validator
+[repo] cloning commons-vfs
+[repo] cloning giraph
+[repo] cloning gora
+[repo] cloning opennlp
+[repo] cloning parquet-mr
+[labels] discovered 27,155 unique commit identifiers
+[repo] indexing commits for ant-ivy
+[repo] indexing commits for commons-bcel
+[repo] indexing commits for commons-beanutils
+[repo] indexing commits for commons-codec
+[repo] indexing commits for commons-collections
+[repo] indexing commits for commons-compress
+[repo] indexing commits for commons-configuration
+[repo] indexing commits for commons-dbcp
+[repo] indexing commits for commons-digester
+[repo] indexing commits for commons-io
+[repo] indexing commits for commons-jcs
+[repo] indexing commits for commons-lang
+[repo] indexing commits for commons-math
+[repo] indexing commits for commons-net
+[repo] indexing commits for commons-scxml
+[repo] indexing commits for commons-validator
+[repo] indexing commits for commons-vfs
+[repo] indexing commits for giraph
+[repo] indexing commits for gora
+[repo] indexing commits for opennlp
+[repo] indexing commits for parquet-mr
+[prepare] CPU workers=8; resolved=27,155; unresolved=0
+[prepare] RESUME: recovered 27,155/27,155 completed commits (27,153 usable) from Google Drive; remaining=0
+[checkpoint] keeping persistent batch shards in /content/drive/MyDrive/FUSE_JIT_PERSISTENT/cache/checkpoints/prepare
+[prepare] saved 27,153 usable commit records locally AND persistently
+[prepare] unresolved labels: 0; skipped after mapping: 2
+[featurize] persistent final cache exists; skipping extraction: /content/drive/MyDrive/FUSE_JIT_PERSISTENT/cache/commit_features.pkl
+
+========================================================================================
+STAGE 3/3 - Train and evaluate FUSE-JIT
+========================================================================================
+[run] device=cuda
+[run] WHOLE DATASET: total=27,153 projects=21
+[run] split=8:1:1 random seed=42 stratified=False
+[run] train=21,722 (1,827 defective) | val=2,715 (199 defective) | test=2,716 (243 defective)
+[booster] restored persistent validation/test predictions
+[run] RESUME: recovered 13 completed GLOBAL runs from Google Drive
+  recovered run 01: Prec=0.3957 Recall=0.4527 F1=0.4223 PofB20=0.6420 AUC=0.8400 MCC=0.3623 Accuracy=0.8892 Balanced_Accuracy=0.6924 R@20%E=0.6420 E@20%R=0.0187 Popt=0.8587 Top10=0.0123 Top5=0.0082 IFA=1.0000 thr=0.5565 epoch=21 neural_w=0.28 val_neural_F1=0.3934 val_blend_F1=0.4626
+  recovered run 02: Prec=0.4464 Recall=0.4115 F1=0.4283 PofB20=0.6420 AUC=0.8422 MCC=0.3750 Accuracy=0.9017 Balanced_Accuracy=0.6807 R@20%E=0.6420 E@20%R=0.0211 Popt=0.8559 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.6163 epoch=16 neural_w=0.38 val_neural_F1=0.3982 val_blend_F1=0.4619
+  recovered run 03: Prec=0.4383 Recall=0.4239 F1=0.4310 PofB20=0.6584 AUC=0.8472 MCC=0.3761 Accuracy=0.8999 Balanced_Accuracy=0.6852 R@20%E=0.6584 E@20%R=0.0191 Popt=0.8677 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5580 epoch=31 neural_w=0.28 val_neural_F1=0.3970 val_blend_F1=0.4747
+  recovered run 04: Prec=0.3869 Recall=0.4856 F1=0.4307 PofB20=0.6502 AUC=0.8446 MCC=0.3706 Accuracy=0.8851 Balanced_Accuracy=0.7050 R@20%E=0.6502 E@20%R=0.0155 Popt=0.8609 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5307 epoch=17 neural_w=0.20 val_neural_F1=0.3725 val_blend_F1=0.4547
+  recovered run 05: Prec=0.4512 Recall=0.3992 F1=0.4236 PofB20=0.6461 AUC=0.8445 MCC=0.3715 Accuracy=0.9028 Balanced_Accuracy=0.6757 R@20%E=0.6461 E@20%R=0.0193 Popt=0.8619 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5629 epoch=26 neural_w=0.20 val_neural_F1=0.3878 val_blend_F1=0.4599
+  recovered run 06: Prec=0.4085 Recall=0.4774 F1=0.4402 PofB20=0.6502 AUC=0.8467 MCC=0.3819 Accuracy=0.8914 Balanced_Accuracy=0.7047 R@20%E=0.6502 E@20%R=0.0175 Popt=0.8634 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5281 epoch=27 neural_w=0.15 val_neural_F1=0.4076 val_blend_F1=0.4579
+  recovered run 07: Prec=0.4537 Recall=0.3827 F1=0.4152 PofB20=0.6584 AUC=0.8470 MCC=0.3646 Accuracy=0.9035 Balanced_Accuracy=0.6687 R@20%E=0.6584 E@20%R=0.0180 Popt=0.8617 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5678 epoch=11 neural_w=0.23 val_neural_F1=0.3850 val_blend_F1=0.4595
+  recovered run 08: Prec=0.4081 Recall=0.4568 F1=0.4311 PofB20=0.6502 AUC=0.8401 MCC=0.3724 Accuracy=0.8921 Balanced_Accuracy=0.6958 R@20%E=0.6502 E@20%R=0.0201 Popt=0.8579 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5860 epoch=19 neural_w=0.33 val_neural_F1=0.3878 val_blend_F1=0.4652
+  recovered run 09: Prec=0.3938 Recall=0.4733 F1=0.4299 PofB20=0.6420 AUC=0.8424 MCC=0.3701 Accuracy=0.8877 Balanced_Accuracy=0.7008 R@20%E=0.6420 E@20%R=0.0175 Popt=0.8567 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5426 epoch=15 neural_w=0.28 val_neural_F1=0.3990 val_blend_F1=0.4688
+  recovered run 10: Prec=0.4202 Recall=0.4115 F1=0.4158 PofB20=0.6379 AUC=0.8382 MCC=0.3591 Accuracy=0.8965 Balanced_Accuracy=0.6779 R@20%E=0.6379 E@20%R=0.0203 Popt=0.8504 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.6105 epoch=14 neural_w=0.33 val_neural_F1=0.4010 val_blend_F1=0.4650
+  recovered run 11: Prec=0.4292 Recall=0.4239 F1=0.4265 PofB20=0.6461 AUC=0.8455 MCC=0.3705 Accuracy=0.8980 Balanced_Accuracy=0.6842 R@20%E=0.6461 E@20%R=0.0181 Popt=0.8634 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5496 epoch=28 neural_w=0.12 val_neural_F1=0.3905 val_blend_F1=0.4655
+  recovered run 12: Prec=0.3648 Recall=0.4774 F1=0.4135 PofB20=0.6296 AUC=0.8370 MCC=0.3513 Accuracy=0.8789 Balanced_Accuracy=0.6978 R@20%E=0.6296 E@20%R=0.0218 Popt=0.8487 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5812 epoch=12 neural_w=0.35 val_neural_F1=0.3906 val_blend_F1=0.4532
+  recovered run 13: Prec=0.4231 Recall=0.4527 F1=0.4374 PofB20=0.6543 AUC=0.8405 MCC=0.3803 Accuracy=0.8958 Balanced_Accuracy=0.6960 R@20%E=0.6543 E@20%R=0.0192 Popt=0.8632 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5702 epoch=21 neural_w=0.30 val_neural_F1=0.3836 val_blend_F1=0.4612
+[run] global model: completed=13 remaining=17
+  run 14: Prec=0.4404 Recall=0.3951 F1=0.4165 PofB20=0.6502 AUC=0.8423 MCC=0.3632 Accuracy=0.9010 Balanced_Accuracy=0.6729 R@20%E=0.6502 E@20%R=0.0207 Popt=0.8622 Top10=0.0123 Top5=0.0082 IFA=0.0000 thr=0.5888 epoch=29 neural_w=0.30 val_neural_F1=0.4000 val_blend_F1=0.4640
+  run 15: Prec=0.3967 Recall=0.4979 F1=0.4416 PofB20=0.6584 AUC=0.8476 MCC=0.3829 Accuracy=0.8873 Balanced_Accuracy=0.7118 R@20%E=0.6584 E@20%R=0.0169 Popt=0.8607 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5247 epoch=17 neural_w=0.23 val_neural_F1=0.3957 val_blend_F1=0.4636
+  run 16: Prec=0.4132 Recall=0.4115 F1=0.4124 PofB20=0.6584 AUC=0.8443 MCC=0.3548 Accuracy=0.8951 Balanced_Accuracy=0.6771 R@20%E=0.6584 E@20%R=0.0190 Popt=0.8607 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5607 epoch=20 neural_w=0.18 val_neural_F1=0.3979 val_blend_F1=0.4532
+  run 17: Prec=0.4029 Recall=0.4527 F1=0.4264 PofB20=0.6584 AUC=0.8450 MCC=0.3671 Accuracy=0.8910 Balanced_Accuracy=0.6934 R@20%E=0.6584 E@20%R=0.0190 Popt=0.8624 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5428 epoch=21 neural_w=0.18 val_neural_F1=0.4113 val_blend_F1=0.4582
+  run 18: Prec=0.4286 Recall=0.4568 F1=0.4422 PofB20=0.6379 AUC=0.8372 MCC=0.3857 Accuracy=0.8969 Balanced_Accuracy=0.6985 R@20%E=0.6379 E@20%R=0.0192 Popt=0.8482 Top10=0.0082 Top5=0.0041 IFA=0.0000 thr=0.6571 epoch=7 neural_w=0.55 val_neural_F1=0.3952 val_blend_F1=0.4530
+  run 19: Prec=0.4167 Recall=0.4115 F1=0.4141 PofB20=0.6337 AUC=0.8380 MCC=0.3569 Accuracy=0.8958 Balanced_Accuracy=0.6775 R@20%E=0.6337 E@20%R=0.0206 Popt=0.8504 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.6013 epoch=8 neural_w=0.43 val_neural_F1=0.3777 val_blend_F1=0.4550
+  run 20: Prec=0.3915 Recall=0.4527 F1=0.4198 PofB20=0.6584 AUC=0.8479 MCC=0.3594 Accuracy=0.8881 Balanced_Accuracy=0.6918 R@20%E=0.6584 E@20%R=0.0172 Popt=0.8612 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5394 epoch=18 neural_w=0.15 val_neural_F1=0.3941 val_blend_F1=0.4561
+  run 21: Prec=0.4263 Recall=0.4403 F1=0.4332 PofB20=0.6543 AUC=0.8466 MCC=0.3766 Accuracy=0.8969 Balanced_Accuracy=0.6911 R@20%E=0.6543 E@20%R=0.0189 Popt=0.8654 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.5238 epoch=20 neural_w=0.10 val_neural_F1=0.3864 val_blend_F1=0.4638
+  run 22: Prec=0.4895 Recall=0.3827 F1=0.4296 PofB20=0.6543 AUC=0.8436 MCC=0.3844 Accuracy=0.9091 Balanced_Accuracy=0.6717 R@20%E=0.6543 E@20%R=0.0199 Popt=0.8562 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.6084 epoch=10 neural_w=0.38 val_neural_F1=0.3795 val_blend_F1=0.4486
+  run 23: Prec=0.4251 Recall=0.4321 F1=0.4286 PofB20=0.6379 AUC=0.8318 MCC=0.3719 Accuracy=0.8969 Balanced_Accuracy=0.6873 R@20%E=0.6379 E@20%R=0.0187 Popt=0.8469 Top10=0.0082 Top5=0.0082 IFA=0.0000 thr=0.6596 epoch=12 neural_w=0.48 val_neural_F1=0.3785 val_blend_F1=0.4508
